@@ -1,0 +1,1087 @@
+/* ============================================================
+ *  Ender Lilies Theme - Main Stylesheet
+ *  终焉之莉莉：骑士寂夜 主题主样式
+ *  设计理念：死亡之雨 · 废墟教堂 · 物哀美学 · 纯净与污秽
+ * ============================================================ */
+
+/* ========== 字体引入 ========== */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Serif+SC:wght@300;400;500;600&display=swap');
+
+/* ========== 浅色模式变量 - 白教堂的雨 ========== */
+:root {
+  --lily-bg-primary: #e8e4ed;
+  --lily-bg-secondary: #ddd8e6;
+  --lily-bg-tertiary: #f0ecf5;
+  --lily-bg-card: rgba(255, 253, 255, 0.72);
+  --lily-bg-card-solid: #fdfbff;
+  --lily-bg-card-hover: rgba(255, 252, 255, 0.88);
+  --lily-text-primary: #3a2f48;
+  --lily-text-secondary: #6b5d7d;
+  --lily-text-muted: #9a8aad;
+  --lily-accent: #7a5c9a;
+  --lily-accent-light: #a88bc5;
+  --lily-accent-dark: #5a3d78;
+  --lily-blood: #8b3a4a;
+  --lily-blood-light: #a85060;
+  --lily-blue-gray: #6a7a95;
+  --lily-lavender: #b8a5d0;
+  --lily-pale-purple: #e0d6eb;
+  --lily-ash-blue: #8a9ab5;
+  --lily-dark-blood: #6b2a3a;
+  --lily-white: #faf8fc;
+  --lily-storm: #5a6a85;
+  --lily-fog: rgba(180, 165, 200, 0.15);
+
+  --lily-border: rgba(160, 140, 185, 0.35);
+  --lily-border-light: rgba(180, 160, 205, 0.2);
+  --lily-shadow: rgba(90, 60, 120, 0.12);
+  --lily-shadow-hover: rgba(90, 60, 120, 0.2);
+  --lily-glow: rgba(168, 139, 197, 0.3);
+
+  --lily-transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  --lily-transition-slow: 1s cubic-bezier(0.4, 0, 0.2, 1);
+  --lily-transition-fast: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========== 深色模式变量 - 腐坏都城 ========== */
+[data-theme='dark'] {
+  --lily-bg-primary: #0d0a12;
+  --lily-bg-secondary: #16111d;
+  --lily-bg-tertiary: #1a1522;
+  --lily-bg-card: rgba(26, 20, 34, 0.75);
+  --lily-bg-card-solid: #1a1422;
+  --lily-bg-card-hover: rgba(35, 27, 45, 0.85);
+  --lily-text-primary: #d0c2e0;
+  --lily-text-secondary: #9a8ab0;
+  --lily-text-muted: #6a5a80;
+  --lily-accent: #b08fd0;
+  --lily-accent-light: #d0b5e8;
+  --lily-accent-dark: #8a6aa8;
+  --lily-blood: #c04a5a;
+  --lily-blood-light: #d06070;
+  --lily-blue-gray: #4a5a75;
+  --lily-lavender: #605078;
+  --lily-pale-purple: #2d2338;
+  --lily-ash-blue: #5a6a85;
+  --lily-dark-blood: #8b3040;
+  --lily-white: #e8e0f0;
+  --lily-storm: #3a4a65;
+  --lily-fog: rgba(100, 80, 130, 0.1);
+
+  --lily-border: rgba(100, 80, 130, 0.4);
+  --lily-border-light: rgba(80, 60, 110, 0.25);
+  --lily-shadow: rgba(0, 0, 0, 0.5);
+  --lily-shadow-hover: rgba(0, 0, 0, 0.7);
+  --lily-glow: rgba(176, 143, 208, 0.25);
+}
+
+/* ========== 全局背景与雨幕氛围 ========== */
+body {
+  background-color: var(--lily-bg-primary);
+  color: var(--lily-text-primary);
+  transition: background var(--lily-transition-slow),
+              color var(--lily-transition);
+  font-family: 'Noto Serif SC', 'Cormorant Garamond', 'Source Han Serif SC', serif;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    repeating-linear-gradient(
+      105deg,
+      transparent 0px,
+      transparent 2px,
+      rgba(180, 165, 200, 0.03) 2px,
+      rgba(180, 165, 200, 0.03) 3px
+    );
+  pointer-events: none;
+  z-index: 1;
+  animation: rainDrift 20s linear infinite;
+}
+
+[data-theme='dark'] body::before {
+  background:
+    repeating-linear-gradient(
+      105deg,
+      transparent 0px,
+      transparent 2px,
+      rgba(80, 60, 110, 0.06) 2px,
+      rgba(80, 60, 110, 0.06) 3px
+    );
+}
+
+@keyframes rainDrift {
+  0% { background-position: 0 0; }
+  100% { background-position: 100px 200px; }
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at 50% 0%, transparent 0%, var(--lily-bg-primary) 70%);
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.5;
+}
+
+/* ========== 玻璃态卡片 - 教堂彩窗风格 ========== */
+#recent-posts > .recent-post-item,
+.card-widget,
+.article-sort-item {
+  background: var(--lily-bg-card);
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  border: 1px solid var(--lily-border);
+  border-radius: 2px;
+  transition: all var(--lily-transition);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 12px var(--lily-shadow);
+}
+
+#recent-posts > .recent-post-item::before,
+.card-widget::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--lily-accent-light) 20%,
+    var(--lily-accent) 50%,
+    var(--lily-accent-light) 80%,
+    transparent 100%
+  );
+  opacity: 0.6;
+  z-index: 1;
+}
+
+#recent-posts > .recent-post-item::after,
+.card-widget::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--lily-border-light) 30%,
+    var(--lily-border) 50%,
+    var(--lily-border-light) 70%,
+    transparent 100%
+  );
+  opacity: 0.4;
+  z-index: 1;
+}
+
+#recent-posts > .recent-post-item:hover,
+.card-widget:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 16px 48px var(--lily-shadow-hover),
+    0 0 30px var(--lily-glow);
+  border-color: var(--lily-accent-light);
+  background: var(--lily-bg-card-hover);
+}
+
+/* 卡片四角装饰 - 哥特式建筑风格 */
+#recent-posts > .recent-post-item > .recent-post-info::before,
+.card-widget > .card-info::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 12px;
+  height: 12px;
+  border-top: 1px solid var(--lily-accent-light);
+  border-left: 1px solid var(--lily-accent-light);
+  opacity: 0.5;
+  transition: opacity var(--lily-transition);
+  z-index: 2;
+}
+
+#recent-posts > .recent-post-item:hover > .recent-post-info::before,
+.card-widget:hover > .card-info::before {
+  opacity: 1;
+}
+
+/* ========== 导航栏 - 教堂穹顶风格 ========== */
+#page-header.nav-fixed #nav,
+#nav {
+  background: linear-gradient(180deg, var(--lily-bg-card) 0%, transparent 100%);
+  backdrop-filter: blur(20px) saturate(130%);
+  -webkit-backdrop-filter: blur(20px) saturate(130%);
+  border-bottom: 1px solid var(--lily-border-light);
+  transition: all var(--lily-transition);
+  box-shadow: 0 4px 20px var(--lily-shadow);
+}
+
+#page-header.nav-fixed #nav a,
+#page-header.nav-fixed #nav #site-name,
+#page-header.nav-fixed #nav #toggle-menu,
+#nav a,
+#nav #site-name {
+  color: var(--lily-text-secondary);
+  transition: all var(--lily-transition);
+  position: relative;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+#page-header.nav-fixed #nav a::after,
+#nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--lily-accent), transparent);
+  transition: all var(--lily-transition);
+  transform: translateX(-50%);
+}
+
+#page-header.nav-fixed #nav a:hover::after,
+#nav a:hover::after {
+  width: 80%;
+}
+
+#page-header.nav-fixed #nav a:hover,
+#page-header.nav-fixed #nav #site-name:hover,
+#nav a:hover {
+  color: var(--lily-accent);
+  text-shadow: 0 0 12px var(--lily-glow);
+}
+
+/* ========== 首页Hero区域 - 白教堂祭坛 ========== */
+#page-header {
+  position: relative;
+  overflow: hidden;
+}
+
+#page-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.15) 0%, transparent 60%),
+    linear-gradient(180deg, transparent 0%, var(--lily-bg-primary) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+#page-header::after {
+  content: '✦   ✦   ✦';
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--lily-white);
+  opacity: 0.6;
+  letter-spacing: 2em;
+  font-size: 12px;
+  z-index: 2;
+  animation: starFloat 4s ease-in-out infinite;
+}
+
+@keyframes starFloat {
+  0%, 100% { opacity: 0.4; transform: translateX(-50%) translateY(0); }
+  50% { opacity: 0.7; transform: translateX(-50%) translateY(-4px); }
+}
+
+#site-title,
+#site-subtitle {
+  position: relative;
+  z-index: 3;
+}
+
+#site-title {
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+
+#site-subtitle {
+  font-weight: 300;
+  letter-spacing: 0.5em;
+  opacity: 0.85;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  font-style: italic;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+/* ========== 标题光晕效果 ========== */
+.article-title,
+.post-title,
+.card-info h1,
+.card-info h2 {
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  position: relative;
+  display: inline-block;
+}
+
+.article-title::after,
+.post-title::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--lily-accent), transparent);
+  transition: width var(--lily-transition);
+}
+
+.article-title:hover::after,
+.post-title:hover::after {
+  width: 100%;
+}
+
+/* ========== 文章内标题 - 手抄本风格 ========== */
+.article-content h1,
+.article-content h2,
+.article-content h3,
+.article-content h4,
+.article-content h5,
+.article-content h6 {
+  color: var(--lily-accent-dark);
+  position: relative;
+  padding-left: 24px;
+  transition: color var(--lily-transition);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
+.article-content h1::before,
+.article-content h2::before,
+.article-content h3::before {
+  content: '❧';
+  position: absolute;
+  left: 0;
+  color: var(--lily-accent);
+  opacity: 0.7;
+  font-size: 0.7em;
+  top: 0.2em;
+}
+
+.article-content h1::after,
+.article-content h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 24px;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--lily-border), transparent);
+}
+
+[data-theme='dark'] .article-content h1,
+[data-theme='dark'] .article-content h2,
+[data-theme='dark'] .article-content h3 {
+  color: var(--lily-accent-light);
+}
+
+/* ========== 文章正文 - 排版优化 ========== */
+.article-content p {
+  line-height: 2;
+  text-indent: 2em;
+  margin-bottom: 1.2em;
+}
+
+.article-content {
+  font-size: 16px;
+  line-height: 2;
+}
+
+/* ========== 分割线 - 中世纪手抄本风格 ========== */
+.article-content hr {
+  border: none;
+  height: 1px;
+  background: transparent;
+  position: relative;
+  margin: 48px 0;
+  opacity: 1;
+}
+
+.article-content hr::before {
+  content: '❀   ✦   ❀';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--lily-accent-light);
+  background: var(--lily-bg-card-solid);
+  padding: 0 24px;
+  font-size: 14px;
+  letter-spacing: 0.5em;
+  text-indent: 0.5em;
+  z-index: 2;
+}
+
+.article-content hr::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--lily-border) 20%,
+    var(--lily-accent-light) 50%,
+    var(--lily-border) 80%,
+    transparent 100%
+  );
+  z-index: 1;
+}
+
+/* ========== 引用块 - 游戏对话UI ========== */
+.article-content blockquote {
+  border: none;
+  padding: 24px 28px;
+  background: var(--lily-bg-tertiary);
+  border-radius: 2px;
+  position: relative;
+  margin: 28px 0;
+  transition: all var(--lily-transition);
+  border-left: 2px solid var(--lily-accent);
+}
+
+.article-content blockquote::before {
+  content: '「';
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  font-size: 28px;
+  color: var(--lily-accent);
+  opacity: 0.5;
+  font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
+  line-height: 1;
+}
+
+.article-content blockquote::after {
+  content: '」';
+  position: absolute;
+  bottom: -4px;
+  right: 16px;
+  font-size: 28px;
+  color: var(--lily-accent);
+  opacity: 0.5;
+  font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
+  line-height: 1;
+}
+
+.article-content blockquote p {
+  margin: 0;
+  padding-left: 16px;
+  color: var(--lily-text-secondary);
+  font-style: italic;
+  font-weight: 300;
+  text-indent: 0;
+}
+
+/* ========== 提示框 - 游戏UI风格 ========== */
+.note {
+  border-radius: 2px !important;
+  border: 1px solid var(--lily-border) !important;
+  background: var(--lily-bg-card-solid) !important;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 12px var(--lily-shadow);
+}
+
+.note::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--lily-accent-light), var(--lily-accent), var(--lily-accent-light));
+}
+
+.note-default {
+  border-left: 3px solid var(--lily-accent) !important;
+}
+
+.note-success {
+  border-left: 3px solid #5a8a6b !important;
+}
+
+.note-danger {
+  border-left: 3px solid var(--lily-blood) !important;
+}
+
+.note-warning {
+  border-left: 3px solid #c4a35a !important;
+}
+
+.note-info {
+  border-left: 3px solid var(--lily-ash-blue) !important;
+}
+
+/* ========== 侧边栏 - 巫女立绘 ========== */
+.lily-witch-float {
+  text-align: center;
+  padding: 16px 0 8px;
+  position: relative;
+}
+
+.lily-witch-float::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, var(--lily-glow) 0%, transparent 70%);
+  animation: auraPulse 4s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes auraPulse {
+  0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+.witch-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 2px solid var(--lily-accent-light);
+  box-shadow:
+    0 0 30px var(--lily-glow),
+    0 4px 20px var(--lily-shadow);
+  animation: witchFloat 5s ease-in-out infinite;
+  object-fit: cover;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes witchFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(-1.5deg);
+    filter: drop-shadow(0 4px 12px var(--lily-shadow));
+  }
+  50% {
+    transform: translateY(-10px) rotate(1.5deg);
+    filter: drop-shadow(0 12px 24px var(--lily-shadow-hover));
+  }
+}
+
+.card-widget.card-info {
+  text-align: center;
+  padding-top: 20px;
+}
+
+/* ========== 个人信息展示区 ========== */
+.card-info-avatar-container {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.card-info-avatar-container::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  border: 1px solid var(--lily-border);
+  border-radius: 50%;
+  opacity: 0.5;
+  animation: ringRotate 20s linear infinite;
+}
+
+.card-info-avatar-container::after {
+  content: '✦';
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--lily-accent);
+  font-size: 12px;
+  animation: starFloat 3s ease-in-out infinite;
+}
+
+@keyframes ringRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ========== 链接样式 ========== */
+a {
+  color: var(--lily-accent);
+  transition: all var(--lily-transition);
+  text-decoration: none;
+  position: relative;
+}
+
+a:hover {
+  color: var(--lily-accent-dark);
+  text-shadow: 0 0 12px var(--lily-glow);
+}
+
+[data-theme='dark'] a:hover {
+  color: var(--lily-accent-light);
+}
+
+/* ========== 按钮 - 骑士誓约风格 ========== */
+.btn {
+  background: linear-gradient(135deg, var(--lily-accent) 0%, var(--lily-accent-dark) 100%);
+  color: var(--lily-white) !important;
+  border-radius: 2px;
+  border: 1px solid var(--lily-accent);
+  transition: all var(--lily-transition);
+  position: relative;
+  overflow: hidden;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  padding: 10px 28px !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  transform: skewX(-15deg);
+  transition: left 0.6s;
+}
+
+.btn:hover::before {
+  left: 120%;
+}
+
+.btn:hover {
+  background: linear-gradient(135deg, var(--lily-accent-dark) 0%, var(--lily-accent) 100%);
+  border-color: var(--lily-accent-light);
+  box-shadow:
+    0 6px 20px var(--lily-shadow-hover),
+    0 0 24px var(--lily-glow);
+  transform: translateY(-3px);
+}
+
+/* ========== 标签 - 花瓣样式 ========== */
+.article-meta__tags a,
+.post-meta__tags a,
+.tag-cloud a {
+  color: var(--lily-accent-dark);
+  background: var(--lily-pale-purple);
+  border-radius: 2px;
+  padding: 4px 14px;
+  margin: 4px;
+  display: inline-block;
+  transition: all var(--lily-transition);
+  font-size: 0.85em;
+  position: relative;
+  overflow: hidden;
+  font-weight: 400;
+}
+
+.article-meta__tags a::before,
+.post-meta__tags a::before,
+.tag-cloud a::before {
+  content: '❀';
+  margin-right: 6px;
+  font-size: 0.8em;
+  opacity: 0.7;
+}
+
+.article-meta__tags a:hover,
+.post-meta__tags a:hover,
+.tag-cloud a:hover {
+  background: var(--lily-accent);
+  color: var(--lily-white) !important;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px var(--lily-shadow-hover);
+}
+
+/* ========== 分页 ========== */
+.page-number,
+.extend {
+  background: var(--lily-bg-card);
+  border: 1px solid var(--lily-border);
+  color: var(--lily-text-secondary);
+  border-radius: 2px;
+  transition: all var(--lily-transition);
+  backdrop-filter: blur(10px);
+  min-width: 40px;
+  height: 40px;
+  line-height: 40px;
+}
+
+.page-number:hover,
+.extend:hover {
+  background: var(--lily-accent);
+  color: var(--lily-white) !important;
+  border-color: var(--lily-accent);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px var(--lily-shadow-hover);
+}
+
+.page-number.current {
+  background: linear-gradient(135deg, var(--lily-accent), var(--lily-accent-dark));
+  color: var(--lily-white);
+  border-color: var(--lily-accent);
+}
+
+/* ========== 页脚 ========== */
+#footer {
+  background: linear-gradient(180deg, transparent 0%, var(--lily-bg-secondary) 100%);
+  border-top: 1px solid var(--lily-border-light);
+  transition: all var(--lily-transition-slow);
+  position: relative;
+  overflow: hidden;
+  margin-top: 60px;
+}
+
+#footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--lily-accent-light), transparent);
+}
+
+#footer::after {
+  content: '❀   ✦   ❀   ✦   ❀';
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--lily-accent-light);
+  opacity: 0.3;
+  letter-spacing: 1.5em;
+  text-indent: 1.5em;
+  font-size: 10px;
+}
+
+#footer-wrap {
+  color: var(--lily-text-secondary);
+  padding-top: 40px;
+}
+
+.footer-quote {
+  font-style: italic;
+  color: var(--lily-text-muted);
+  font-size: 0.9em;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--lily-border-light);
+  line-height: 2;
+  font-weight: 300;
+}
+
+/* ========== 滚动条 ========== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--lily-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--lily-accent-light), var(--lily-accent));
+  border-radius: 3px;
+  transition: background var(--lily-transition);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--lily-accent), var(--lily-accent-dark));
+}
+
+/* ========== 选中文字 ========== */
+::selection {
+  background: var(--lily-accent);
+  color: var(--lily-white);
+}
+
+::-moz-selection {
+  background: var(--lily-accent);
+  color: var(--lily-white);
+}
+
+/* ========== 暗色模式过渡 ========== */
+* {
+  transition: background-color var(--lily-transition-slow),
+              border-color var(--lily-transition-slow),
+              color var(--lily-transition),
+              box-shadow var(--lily-transition);
+}
+
+canvas,
+img {
+  transition: none !important;
+}
+
+/* ========== 滚动淡入 ========== */
+.scroll-fade-in {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s ease-out, transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========== Canvas 容器 ========== */
+#lily-petals-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+#lily-mouse-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+#lily-rain-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* ========== 文章顶部封面图 ========== */
+#post .post-bg {
+  opacity: 0.7;
+  filter: saturate(0.85) brightness(0.9);
+}
+
+/* ========== 文章卡片封面 ========== */
+.recent-post-item .cover,
+.article-sort-item .cover {
+  filter: saturate(0.9) brightness(0.95);
+  transition: all var(--lily-transition);
+}
+
+.recent-post-item:hover .cover,
+.article-sort-item:hover .cover {
+  filter: saturate(1) brightness(1.05);
+  transform: scale(1.05);
+}
+
+/* ========== 阅读进度条 ========== */
+.reading-progress-bar {
+  background: linear-gradient(90deg, var(--lily-accent-light), var(--lily-accent), var(--lily-blood)) !important;
+  height: 2px !important;
+  box-shadow: 0 0 8px var(--lily-glow);
+}
+
+/* ========== 回到顶部按钮 ========== */
+#go-up {
+  background: linear-gradient(135deg, var(--lily-accent), var(--lily-accent-dark)) !important;
+  color: var(--lily-white) !important;
+  border-radius: 50% !important;
+  width: 44px !important;
+  height: 44px !important;
+  line-height: 44px !important;
+  box-shadow: 0 4px 16px var(--lily-shadow-hover), 0 0 20px var(--lily-glow);
+  transition: all var(--lily-transition);
+  border: 1px solid var(--lily-accent-light);
+}
+
+#go-up:hover {
+  background: linear-gradient(135deg, var(--lily-accent-dark), var(--lily-accent)) !important;
+  transform: translateY(-4px) !important;
+  box-shadow: 0 8px 24px var(--lily-shadow-hover), 0 0 30px var(--lily-glow);
+}
+
+/* ========== 暗色模式切换按钮 ========== */
+#darkmode-toggle {
+  background: var(--lily-bg-card);
+  border: 1px solid var(--lily-border);
+  border-radius: 50%;
+  transition: all var(--lily-transition);
+  backdrop-filter: blur(10px);
+}
+
+#darkmode-toggle:hover {
+  border-color: var(--lily-accent);
+  color: var(--lily-accent);
+  box-shadow: 0 0 16px var(--lily-glow);
+}
+
+/* ========== 文章元信息 ========== */
+.article-meta,
+.post-meta {
+  color: var(--lily-text-muted);
+  font-size: 0.9em;
+  font-weight: 300;
+}
+
+.article-meta__categories a,
+.post-meta__categories a {
+  color: var(--lily-accent);
+  font-weight: 400;
+}
+
+/* ========== 文章分类标签 ========== */
+.article-meta__categories a::before,
+.post-meta__categories a::before {
+  content: '❧ ';
+  opacity: 0.6;
+}
+
+/* ========== 代码块 ========== */
+.article-content pre,
+.article-content figure.highlight {
+  border-radius: 2px !important;
+  border: 1px solid var(--lily-border) !important;
+  box-shadow: 0 4px 16px var(--lily-shadow) !important;
+  position: relative;
+}
+
+.article-content figure.highlight::before {
+  content: '❖ code';
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 10px;
+  color: var(--lily-text-muted);
+  opacity: 0.6;
+  letter-spacing: 0.1em;
+}
+
+.article-content figure.highlight .gutter pre {
+  background: var(--lily-bg-tertiary) !important;
+}
+
+/* ========== 表格 - 哥特式 ========== */
+.article-content table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 24px 0;
+  border-radius: 2px;
+  overflow: hidden;
+  border: 1px solid var(--lily-border);
+  box-shadow: 0 2px 12px var(--lily-shadow);
+}
+
+.article-content table th {
+  background: linear-gradient(180deg, var(--lily-accent), var(--lily-accent-dark));
+  color: var(--lily-white);
+  padding: 12px 18px;
+  text-align: left;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
+.article-content table td {
+  padding: 10px 18px;
+  border-bottom: 1px solid var(--lily-border-light);
+  transition: background 0.3s;
+}
+
+.article-content table tr:hover td {
+  background: var(--lily-bg-tertiary);
+}
+
+.article-content table tr:last-child td {
+  border-bottom: none;
+}
+
+/* ========== 文章版权信息 ========== */
+.post-copyright {
+  background: var(--lily-bg-tertiary) !important;
+  border: 1px solid var(--lily-border) !important;
+  border-radius: 2px !important;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 12px var(--lily-shadow);
+}
+
+.post-copyright::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--lily-accent-light), var(--lily-accent), var(--lily-accent-light));
+}
+
+/* ========== 相关文章 ========== */
+.relatedPosts .relatedPosts-item {
+  background: var(--lily-bg-card) !important;
+  border: 1px solid var(--lily-border) !important;
+  border-radius: 2px !important;
+  backdrop-filter: blur(10px);
+  transition: all var(--lily-transition);
+}
+
+.relatedPosts .relatedPosts-item:hover {
+  border-color: var(--lily-accent-light) !important;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px var(--lily-shadow-hover);
+}
+
+/* ========== 移动端适配 ========== */
+@media (max-width: 768px) {
+  .article-content p {
+    text-indent: 1.5em;
+  }
+
+  #site-title {
+    letter-spacing: 0.15em;
+  }
+
+  #site-subtitle {
+    letter-spacing: 0.3em;
+  }
+
+  .witch-avatar {
+    width: 90px;
+    height: 90px;
+  }
+}
